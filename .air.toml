@@ -12,7 +12,7 @@ tmp_dir = "tmp"
   exclude_regex = ["_test.go"]
   exclude_unchanged = false
   follow_symlink = false
-  full_bin = "./galene -turn=192.168.1.7:3478"
+  full_bin = "./galene -turn=192.168.1.7:1194"
   include_dir = []
   include_ext = ["go", "tpl", "tmpl", "html"]
   include_file = []
