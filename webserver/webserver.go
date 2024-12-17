@@ -18,6 +18,7 @@ import (
 	"sort"
 	"strings"
 	"time"
+	"math/rand"
 
 	"github.com/gorilla/websocket"
 
@@ -35,6 +36,7 @@ var Insecure bool
 
 func Serve(address string, dataDir string) error {
 	http.Handle("/", &fileHandler{http.Dir(StaticRoot)})
+	http.HandleFunc("/newmeet", newMeetHandler)
 	http.HandleFunc("/group/", groupHandler)
 	http.HandleFunc("/recordings",
 		func(w http.ResponseWriter, r *http.Request) {
@@ -86,6 +88,32 @@ func Serve(address string, dataDir string) error {
 		}
 	}()
 	return nil
+}
+
+func generateRandomID() string {
+	const charset = "abcdefghijklmnopqrstuvwxyz"
+	rand.Seed(time.Now().UnixNano())
+
+	var parts []string
+	for i := 0; i < 3; i++ {
+		part := make([]byte, 3)
+		for j := range part {
+			part[j] = charset[rand.Intn(len(charset))]
+		}
+		parts = append(parts, string(part))
+	}
+
+	return strings.Join(parts, "-")
+}
+
+func newMeetHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		notFound(w)
+		return
+	}
+
+	id := generateRandomID()
+	http.Redirect(w, r, "/group/"+id, http.StatusFound)
 }
 
 func cspHeader(w http.ResponseWriter, connect string) {
