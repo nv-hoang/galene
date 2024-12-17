@@ -1,0 +1,9 @@
+import './style.css';
+import $ from 'jquery';
+import { galeneInit } from './galene';
+
+$(function () {
+    if ($('body').hasClass('page-galene')) {
+        galeneInit();
+    }
+});
