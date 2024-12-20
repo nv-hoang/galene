@@ -1,3 +1,81 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.main-container {
+    height: calc(100dvh - 128px);
+}
+
+#peers {
+    min-height: calc(100dvh - 128px);
+}
+
+#peers .peer {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#peers .peer .peer-user{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: var(--tw-primary-500);
+    color: white;
+    font-size: 13px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background-color: black;
+}
+
+.sidebar {
+    height: calc(100dvh - 128px);
+}
+
+.sidebar {
+    transform: translateX(400px);
+}
+
+body.has-sidebar .main-container {
+    margin-right: 366px;
+}
+body.has-sidebar .sidebar {
+    transform: translateX(0px) !important;
+}
+
+.message-header {
+    margin-top: 12px;
+}
+.message-user {
+    font-weight: 600;
+    margin-right: 6px;
+}
+
+.message-time {
+    color: #5f6368;
+    font-style: italic;
+    font-size: 12px;
+}
+
+.message-content {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.message-content > div {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background-color: #dfdfdf;
+    margin-bottom: 4px;
+}

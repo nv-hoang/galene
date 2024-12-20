@@ -155,78 +155,78 @@ function reflectSettings() {
     }
     audioselect.value = settings.audio;
 
-    if (settings.hasOwnProperty('filter')) {
-        getSelectElement('filterselect').value = settings.filter;
-    } else {
-        let s = getSelectElement('filterselect').value;
-        if (s) {
-            settings.filter = s;
-            store = true;
-        }
-    }
+    // if (settings.hasOwnProperty('filter')) {
+    //     getSelectElement('filterselect').value = settings.filter;
+    // } else {
+    //     let s = getSelectElement('filterselect').value;
+    //     if (s) {
+    //         settings.filter = s;
+    //         store = true;
+    //     }
+    // }
 
-    if (settings.hasOwnProperty('request')) {
-        getSelectElement('requestselect').value = settings.request;
-    } else {
-        settings.request = getSelectElement('requestselect').value;
-        store = true;
-    }
+    // if (settings.hasOwnProperty('request')) {
+    //     getSelectElement('requestselect').value = settings.request;
+    // } else {
+    //     settings.request = getSelectElement('requestselect').value;
+    //     store = true;
+    // }
 
-    if (settings.hasOwnProperty('send')) {
-        getSelectElement('sendselect').value = settings.send;
-    } else {
-        settings.send = getSelectElement('sendselect').value;
-        store = true;
-    }
+    // if (settings.hasOwnProperty('send')) {
+    //     getSelectElement('sendselect').value = settings.send;
+    // } else {
+    //     settings.send = getSelectElement('sendselect').value;
+    //     store = true;
+    // }
 
-    if (settings.hasOwnProperty('simulcast')) {
-        getSelectElement('simulcastselect').value = settings.simulcast
-    } else {
-        settings.simulcast = getSelectElement('simulcastselect').value;
-        store = true;
-    }
+    // if (settings.hasOwnProperty('simulcast')) {
+    //     getSelectElement('simulcastselect').value = settings.simulcast
+    // } else {
+    //     settings.simulcast = getSelectElement('simulcastselect').value;
+    //     store = true;
+    // }
 
-    if (settings.hasOwnProperty('blackboardMode')) {
-        getInputElement('blackboardbox').checked = settings.blackboardMode;
-    } else {
-        settings.blackboardMode = getInputElement('blackboardbox').checked;
-        store = true;
-    }
+    // if (settings.hasOwnProperty('blackboardMode')) {
+    //     getInputElement('blackboardbox').checked = settings.blackboardMode;
+    // } else {
+    //     settings.blackboardMode = getInputElement('blackboardbox').checked;
+    //     store = true;
+    // }
 
-    if (settings.hasOwnProperty('mirrorView')) {
-        getInputElement('mirrorbox').checked = settings.mirrorView;
-    } else {
-        settings.mirrorView = getInputElement('mirrorbox').checked;
-        store = true;
-    }
+    // if (settings.hasOwnProperty('mirrorView')) {
+    //     getInputElement('mirrorbox').checked = settings.mirrorView;
+    // } else {
+    //     settings.mirrorView = getInputElement('mirrorbox').checked;
+    //     store = true;
+    // }
 
-    if (settings.hasOwnProperty('activityDetection')) {
-        getInputElement('activitybox').checked = settings.activityDetection;
-    } else {
-        settings.activityDetection = getInputElement('activitybox').checked;
-        store = true;
-    }
+    // if (settings.hasOwnProperty('activityDetection')) {
+    //     getInputElement('activitybox').checked = settings.activityDetection;
+    // } else {
+    //     settings.activityDetection = getInputElement('activitybox').checked;
+    //     store = true;
+    // }
 
-    if (settings.hasOwnProperty('displayAll')) {
-        getInputElement('displayallbox').checked = settings.displayAll;
-    } else {
-        settings.displayAll = getInputElement('displayallbox').checked;
-        store = true;
-    }
+    // if (settings.hasOwnProperty('displayAll')) {
+    //     getInputElement('displayallbox').checked = settings.displayAll;
+    // } else {
+    //     settings.displayAll = getInputElement('displayallbox').checked;
+    //     store = true;
+    // }
 
-    if (settings.hasOwnProperty('preprocessing')) {
-        getInputElement('preprocessingbox').checked = settings.preprocessing;
-    } else {
-        settings.preprocessing = getInputElement('preprocessingbox').checked;
-        store = true;
-    }
+    // if (settings.hasOwnProperty('preprocessing')) {
+    //     getInputElement('preprocessingbox').checked = settings.preprocessing;
+    // } else {
+    //     settings.preprocessing = getInputElement('preprocessingbox').checked;
+    //     store = true;
+    // }
 
-    if (settings.hasOwnProperty('hqaudio')) {
-        getInputElement('hqaudiobox').checked = settings.hqaudio;
-    } else {
-        settings.hqaudio = getInputElement('hqaudiobox').checked;
-        store = true;
-    }
+    // if (settings.hasOwnProperty('hqaudio')) {
+    //     getInputElement('hqaudiobox').checked = settings.hqaudio;
+    // } else {
+    //     settings.hqaudio = getInputElement('hqaudiobox').checked;
+    //     store = true;
+    // }
 
     if (store)
         storeSettings(settings);
@@ -276,12 +276,17 @@ let safariStream = null;
   * @param{boolean} connected
   */
 function setConnected(connected) {
-    let userbox = document.getElementById('profile');
-    let connectionbox = document.getElementById('login-container');
+    // let userbox = document.getElementById('profile');
+    // let connectionbox = document.getElementById('login-container');
     if (connected) {
         clearChat();
-        userbox.classList.remove('invisible');
-        connectionbox.classList.add('invisible');
+        // userbox.classList.remove('invisible');
+        setVisibility('navbuttons', true);
+        setVisibility('disconnectbutton', true);
+
+        // connectionbox.classList.add('invisible');
+        document.getElementById('loginDialog').close();
+
         displayUsername();
         window.onresize = function (e) {
             scheduleReconsiderDownRate();
@@ -295,11 +300,20 @@ function setConnected(connected) {
                 });
             }
         }
+
+        $('#presentbutton').click();
     } else {
-        userbox.classList.add('invisible');
-        connectionbox.classList.remove('invisible');
+        // userbox.classList.add('invisible');
+        setVisibility('navbuttons', false);
+        setVisibility('disconnectbutton', false);
+
+        // connectionbox.classList.remove('invisible');
+        document.getElementById('loginDialog').showModal();
+
         hideVideo();
         window.onresize = null;
+
+        window.location.href = '/';
     }
 }
 
@@ -315,18 +329,18 @@ async function gotConnected() {
  * @param {string} username
  */
 function setChangePassword(username) {
-    let s = document.getElementById('chpwspan');
-    let a = s.children[0];
-    if (!(a instanceof HTMLAnchorElement))
-        throw new Error('Bad type for chpwspan');
-    if (username) {
-        a.href = `/change-password.html?group=${encodeURI(group)}&username=${encodeURI(username)}`;
-        a.target = '_blank';
-        s.classList.remove('invisible');
-    } else {
-        a.href = null;
-        s.classList.add('invisible');
-    }
+    // let s = document.getElementById('chpwspan');
+    // let a = s.children[0];
+    // if (!(a instanceof HTMLAnchorElement))
+    //     throw new Error('Bad type for chpwspan');
+    // if (username) {
+    //     a.href = `/change-password.html?group=${encodeURI(group)}&username=${encodeURI(username)}`;
+    //     a.target = '_blank';
+    //     s.classList.remove('invisible');
+    // } else {
+    //     a.href = null;
+    //     s.classList.add('invisible');
+    // }
 }
 
 async function join() {
@@ -362,8 +376,9 @@ async function join() {
             console.warn(`Unexpected probing state ${probingState}`);
             probingState = null;
         }
-        let pw = getInputElement('password').value;
-        getInputElement('password').value = '';
+        let pw = '';
+        // let pw = getInputElement('password').value;
+        // getInputElement('password').value = '';
         if (!groupStatus.authServer) {
             pwAuth = true;
             credentials = pw;
@@ -490,11 +505,9 @@ getButtonElement('unpresentbutton').onclick = function (e) {
  * @param {boolean} visible
  */
 function setVisibility(id, visible) {
-    let elt = document.getElementById(id);
-    if (visible)
-        elt.classList.remove('invisible');
-    else
-        elt.classList.add('invisible');
+    if ($('#' + id).length) {
+        visible ? $('#' + id).show() : $('#' + id).hide();
+    }
 }
 
 function setButtonsVisibility() {
@@ -535,16 +548,20 @@ function setButtonsVisibility() {
  */
 function setLocalMute(mute, reflect) {
     muteLocalTracks(mute);
-    let button = document.getElementById('mutebutton');
-    let icon = button.querySelector("span .fas");
+    // let button = document.getElementById('mutebutton');
+    // let icon = button.querySelector("span .fas");
     if (mute) {
-        icon.classList.add('fa-microphone-slash');
-        icon.classList.remove('fa-microphone');
-        button.classList.add('muted');
+        // icon.classList.add('fa-microphone-slash');
+        // icon.classList.remove('fa-microphone');
+        // button.classList.add('muted');
+        $('#mutebutton svg:first-child').hide();
+        $('#mutebutton svg:last-child').show();
     } else {
-        icon.classList.remove('fa-microphone-slash');
-        icon.classList.add('fa-microphone');
-        button.classList.remove('muted');
+        // icon.classList.remove('fa-microphone-slash');
+        // icon.classList.add('fa-microphone');
+        // button.classList.remove('muted');
+        $('#mutebutton svg:last-child').hide();
+        $('#mutebutton svg:first-child').show();
     }
     if (reflect)
         updateSettings({ localMute: mute });
@@ -566,38 +583,38 @@ getSelectElement('audioselect').onchange = function (e) {
     replaceCameraStream();
 };
 
-getInputElement('mirrorbox').onchange = function (e) {
-    e.preventDefault();
-    if (!(this instanceof HTMLInputElement))
-        throw new Error('Unexpected type for this');
-    updateSettings({ mirrorView: this.checked });
-    // no need to reopen the camera
-    replaceUpStreams('camera');
-};
+// getInputElement('mirrorbox').onchange = function (e) {
+//     e.preventDefault();
+//     if (!(this instanceof HTMLInputElement))
+//         throw new Error('Unexpected type for this');
+//     updateSettings({ mirrorView: this.checked });
+//     // no need to reopen the camera
+//     replaceUpStreams('camera');
+// };
 
-getInputElement('blackboardbox').onchange = function (e) {
-    e.preventDefault();
-    if (!(this instanceof HTMLInputElement))
-        throw new Error('Unexpected type for this');
-    updateSettings({ blackboardMode: this.checked });
-    replaceCameraStream();
-};
+// getInputElement('blackboardbox').onchange = function (e) {
+//     e.preventDefault();
+//     if (!(this instanceof HTMLInputElement))
+//         throw new Error('Unexpected type for this');
+//     updateSettings({ blackboardMode: this.checked });
+//     replaceCameraStream();
+// };
 
-getInputElement('preprocessingbox').onchange = function (e) {
-    e.preventDefault();
-    if (!(this instanceof HTMLInputElement))
-        throw new Error('Unexpected type for this');
-    updateSettings({ preprocessing: this.checked });
-    replaceCameraStream();
-};
+// getInputElement('preprocessingbox').onchange = function (e) {
+//     e.preventDefault();
+//     if (!(this instanceof HTMLInputElement))
+//         throw new Error('Unexpected type for this');
+//     updateSettings({ preprocessing: this.checked });
+//     replaceCameraStream();
+// };
 
-getInputElement('hqaudiobox').onchange = function (e) {
-    e.preventDefault();
-    if (!(this instanceof HTMLInputElement))
-        throw new Error('Unexpected type for this');
-    updateSettings({ hqaudio: this.checked });
-    replaceCameraStream();
-};
+// getInputElement('hqaudiobox').onchange = function (e) {
+//     e.preventDefault();
+//     if (!(this instanceof HTMLInputElement))
+//         throw new Error('Unexpected type for this');
+//     updateSettings({ hqaudio: this.checked });
+//     replaceCameraStream();
+// };
 
 document.getElementById('mutebutton').onclick = function (e) {
     e.preventDefault();
@@ -611,20 +628,20 @@ document.getElementById('sharebutton').onclick = function (e) {
     addShareMedia();
 };
 
-getSelectElement('filterselect').onchange = async function (e) {
-    if (!(this instanceof HTMLSelectElement))
-        throw new Error('Unexpected type for this');
-    updateSettings({ filter: this.value });
-    let c = findUpMedia('camera');
-    if (c) {
-        let filter = (this.value && filters[this.value]) || null;
-        if (filter)
-            c.userdata.filterDefinition = filter;
-        else
-            delete c.userdata.filterDefinition;
-        replaceUpStream(c);
-    }
-};
+// getSelectElement('filterselect').onchange = async function (e) {
+//     if (!(this instanceof HTMLSelectElement))
+//         throw new Error('Unexpected type for this');
+//     updateSettings({ filter: this.value });
+//     let c = findUpMedia('camera');
+//     if (c) {
+//         let filter = (this.value && filters[this.value]) || null;
+//         if (filter)
+//             c.userdata.filterDefinition = filter;
+//         else
+//             delete c.userdata.filterDefinition;
+//         replaceUpStream(c);
+//     }
+// };
 
 /** @returns {number} */
 function getMaxVideoThroughput() {
@@ -644,19 +661,19 @@ function getMaxVideoThroughput() {
     }
 }
 
-getSelectElement('sendselect').onchange = async function (e) {
-    if (!(this instanceof HTMLSelectElement))
-        throw new Error('Unexpected type for this');
-    updateSettings({ send: this.value });
-    await reconsiderSendParameters();
-};
+// getSelectElement('sendselect').onchange = async function (e) {
+//     if (!(this instanceof HTMLSelectElement))
+//         throw new Error('Unexpected type for this');
+//     updateSettings({ send: this.value });
+//     await reconsiderSendParameters();
+// };
 
-getSelectElement('simulcastselect').onchange = async function (e) {
-    if (!(this instanceof HTMLSelectElement))
-        throw new Error('Unexpected type for this');
-    updateSettings({ simulcast: this.value });
-    await reconsiderSendParameters();
-};
+// getSelectElement('simulcastselect').onchange = async function (e) {
+//     if (!(this instanceof HTMLSelectElement))
+//         throw new Error('Unexpected type for this');
+//     updateSettings({ simulcast: this.value });
+//     await reconsiderSendParameters();
+// };
 
 /**
  * @param {string} what
@@ -700,44 +717,44 @@ function mapRequestLabel(what, label) {
 }
 
 
-getSelectElement('requestselect').onchange = function (e) {
-    e.preventDefault();
-    if (!(this instanceof HTMLSelectElement))
-        throw new Error('Unexpected type for this');
-    updateSettings({ request: this.value });
-    serverConnection.request(mapRequest(this.value));
-    reconsiderDownRate();
-};
+// getSelectElement('requestselect').onchange = function (e) {
+//     e.preventDefault();
+//     if (!(this instanceof HTMLSelectElement))
+//         throw new Error('Unexpected type for this');
+//     updateSettings({ request: this.value });
+//     serverConnection.request(mapRequest(this.value));
+//     reconsiderDownRate();
+// };
 
 const activityDetectionInterval = 200;
 const activityDetectionPeriod = 700;
 const activityDetectionThreshold = 0.2;
 
-getInputElement('activitybox').onchange = function (e) {
-    if (!(this instanceof HTMLInputElement))
-        throw new Error('Unexpected type for this');
-    updateSettings({ activityDetection: this.checked });
-    for (let id in serverConnection.down) {
-        let c = serverConnection.down[id];
-        if (this.checked)
-            c.setStatsInterval(activityDetectionInterval);
-        else {
-            c.setStatsInterval(0);
-            setActive(c, false);
-        }
-    }
-};
+// getInputElement('activitybox').onchange = function (e) {
+//     if (!(this instanceof HTMLInputElement))
+//         throw new Error('Unexpected type for this');
+//     updateSettings({ activityDetection: this.checked });
+//     for (let id in serverConnection.down) {
+//         let c = serverConnection.down[id];
+//         if (this.checked)
+//             c.setStatsInterval(activityDetectionInterval);
+//         else {
+//             c.setStatsInterval(0);
+//             setActive(c, false);
+//         }
+//     }
+// };
 
-getInputElement('displayallbox').onchange = function (e) {
-    if (!(this instanceof HTMLInputElement))
-        throw new Error('Unexpected type for this');
-    updateSettings({ displayAll: this.checked });
-    for (let id in serverConnection.down) {
-        let c = serverConnection.down[id];
-        let elt = document.getElementById('peer-' + c.localId);
-        showHideMedia(c, elt);
-    }
-};
+// getInputElement('displayallbox').onchange = function (e) {
+//     if (!(this instanceof HTMLInputElement))
+//         throw new Error('Unexpected type for this');
+//     updateSettings({ displayAll: this.checked });
+//     for (let id in serverConnection.down) {
+//         let c = serverConnection.down[id];
+//         let elt = document.getElementById('peer-' + c.localId);
+//         showHideMedia(c, elt);
+//     }
+// };
 
 
 /**
@@ -785,8 +802,8 @@ function setActive(c, value) {
  * @param {Object<string,any>} stats
  */
 function gotDownStats(stats) {
-    if (!getInputElement('activitybox').checked)
-        return;
+    // if (!getInputElement('activitybox').checked)
+    //     return;
 
     let c = this;
 
@@ -1318,15 +1335,15 @@ let filters = {
 };
 
 async function addFilters() {
-    for (let name in filters) {
-        let f = filters[name];
-        if (f.predicate) {
-            if (!(await f.predicate.call(f)))
-                continue;
-        }
-        let d = f.description || name;
-        addSelectOption(getSelectElement('filterselect'), d, name);
-    }
+    // for (let name in filters) {
+    //     let f = filters[name];
+    //     if (f.predicate) {
+    //         if (!(await f.predicate.call(f)))
+    //             continue;
+    //     }
+    //     let d = f.description || name;
+    //     addSelectOption(getSelectElement('filterselect'), d, name);
+    // }
 }
 
 const unlimitedRate = 1000000000;
@@ -1904,6 +1921,9 @@ async function setMedia(c, mirror, video) {
         div = document.createElement('div');
         div.id = 'peer-' + c.localId;
         div.classList.add('peer');
+
+        $('<div class="peer-user">' + c.sc.username + '</div>').appendTo(div);
+
         let peersdiv = document.getElementById('peers');
         peersdiv.appendChild(div);
     }
@@ -1943,13 +1963,13 @@ async function setMedia(c, mirror, video) {
         }
     }
 
-    let label = document.getElementById('label-' + c.localId);
-    if (!label) {
-        label = document.createElement('div');
-        label.id = 'label-' + c.localId;
-        label.classList.add('label');
-        div.appendChild(label);
-    }
+    // let label = document.getElementById('label-' + c.localId);
+    // if (!label) {
+    //     label = document.createElement('div');
+    //     label.id = 'label-' + c.localId;
+    //     label.classList.add('label');
+    //     div.appendChild(label);
+    // }
 
     setLabel(c);
     setMediaStatus(c);
@@ -2012,34 +2032,34 @@ function cloneHTMLElement(elt) {
  * @param {Stream} c
  */
 function addCustomControls(media, container, c, toponly) {
-    if (!toponly && !document.getElementById('controls-' + c.localId)) {
-        media.controls = false;
+    // if (!toponly && !document.getElementById('controls-' + c.localId)) {
+    //     media.controls = false;
 
-        let template =
-            document.getElementById('videocontrols-template').firstElementChild;
-        let controls = cloneHTMLElement(template);
-        controls.id = 'controls-' + c.localId;
+    //     let template =
+    //         document.getElementById('videocontrols-template').firstElementChild;
+    //     let controls = cloneHTMLElement(template);
+    //     controls.id = 'controls-' + c.localId;
 
-        let volume = getVideoButton(controls, 'volume');
+    //     let volume = getVideoButton(controls, 'volume');
 
-        if (c.up && c.label === 'camera') {
-            volume.remove();
-        } else {
-            setVolumeButton(media.muted,
-                getVideoButton(controls, "volume-mute"),
-                getVideoButton(controls, "volume-slider"));
-        }
-        container.appendChild(controls);
-    }
+    //     if (c.up && c.label === 'camera') {
+    //         volume.remove();
+    //     } else {
+    //         setVolumeButton(media.muted,
+    //             getVideoButton(controls, "volume-mute"),
+    //             getVideoButton(controls, "volume-slider"));
+    //     }
+    //     container.appendChild(controls);
+    // }
 
-    if (c.up && !document.getElementById('topcontrols-' + c.localId)) {
-        let toptemplate =
-            document.getElementById('topvideocontrols-template').firstElementChild;
-        let topcontrols = cloneHTMLElement(toptemplate);
-        topcontrols.id = 'topcontrols-' + c.localId;
-        container.appendChild(topcontrols);
-    }
-    registerControlHandlers(c.localId, media, container);
+    // if (c.up && !document.getElementById('topcontrols-' + c.localId)) {
+    //     let toptemplate =
+    //         document.getElementById('topvideocontrols-template').firstElementChild;
+    //     let topcontrols = cloneHTMLElement(toptemplate);
+    //     topcontrols.id = 'topcontrols-' + c.localId;
+    //     container.appendChild(topcontrols);
+    // }
+    // registerControlHandlers(c.localId, media, container);
 }
 
 /**
@@ -2250,18 +2270,18 @@ function resizePeers() {
     } else {
         peers.style['grid-template-columns'] = `repeat(${columns}, 1fr)`;
     }
-    if (count === 1)
-        return;
-    let max_video_height = (peers.offsetHeight - margins) / rows;
-    let media_list = peers.querySelectorAll(".media");
-    for (let i = 0; i < media_list.length; i++) {
-        let media = media_list[i];
-        if (!(media instanceof HTMLMediaElement)) {
-            console.warn('Unexpected media');
-            continue;
-        }
-        media.style['max-height'] = max_video_height + "px";
-    }
+    // if (count === 1)
+    //     return;
+    // let max_video_height = (peers.offsetHeight - margins) / rows;
+    // let media_list = peers.querySelectorAll(".media");
+    // for (let i = 0; i < media_list.length; i++) {
+    //     let media = media_list[i];
+    //     if (!(media instanceof HTMLMediaElement)) {
+    //         console.warn('Unexpected media');
+    //         continue;
+    //     }
+    //     media.style['max-height'] = max_video_height + "px";
+    // }
 }
 
 /**
@@ -2327,43 +2347,43 @@ function inviteMenu() {
     d.showModal();
 }
 
-document.getElementById('invite-dialog').onclose = function (e) {
-    if (!(this instanceof HTMLDialogElement))
-        throw new Error('Unexpected type for this');
-    let dialog = /** @type {HTMLDialogElement} */(this);
-    if (dialog.returnValue !== 'invite')
-        return;
-    let u = getInputElement('invite-username');
-    let username = u.value.trim() || null;
-    let nb = getInputElement('invite-not-before');
-    let notBefore = null;
-    if (nb.value) {
-        try {
-            notBefore = dateFromInput(nb.value);
-        } catch (e) {
-            displayError(`Couldn't parse ${nb.value}: ${e}`);
-            return;
-        }
-    }
-    let ex = getInputElement('invite-expires');
-    let expires = null;
-    if (ex.value) {
-        try {
-            expires = dateFromInput(ex.value);
-        } catch (e) {
-            displayError(`Couldn't parse ${nb.value}: ${e}`);
-            return;
-        }
-    }
-    let template = {}
-    if (username)
-        template.username = username;
-    if (notBefore)
-        template['not-before'] = notBefore;
-    if (expires)
-        template.expires = expires;
-    makeToken(template);
-};
+// document.getElementById('invite-dialog').onclose = function (e) {
+//     if (!(this instanceof HTMLDialogElement))
+//         throw new Error('Unexpected type for this');
+//     let dialog = /** @type {HTMLDialogElement} */(this);
+//     if (dialog.returnValue !== 'invite')
+//         return;
+//     let u = getInputElement('invite-username');
+//     let username = u.value.trim() || null;
+//     let nb = getInputElement('invite-not-before');
+//     let notBefore = null;
+//     if (nb.value) {
+//         try {
+//             notBefore = dateFromInput(nb.value);
+//         } catch (e) {
+//             displayError(`Couldn't parse ${nb.value}: ${e}`);
+//             return;
+//         }
+//     }
+//     let ex = getInputElement('invite-expires');
+//     let expires = null;
+//     if (ex.value) {
+//         try {
+//             expires = dateFromInput(ex.value);
+//         } catch (e) {
+//             displayError(`Couldn't parse ${nb.value}: ${e}`);
+//             return;
+//         }
+//     }
+//     let template = {}
+//     if (username)
+//         template.username = username;
+//     if (notBefore)
+//         template['not-before'] = notBefore;
+//     if (expires)
+//         template.expires = expires;
+//     makeToken(template);
+// };
 
 /**
  * @param {HTMLElement} elt
@@ -2458,12 +2478,12 @@ function addUser(id, userinfo) {
     user.id = 'user-' + id;
     user.classList.add("user-p");
     setUserStatus(id, user, userinfo);
-    user.addEventListener('click', function (e) {
-        let elt = e.target;
-        if (!elt || !(elt instanceof HTMLElement))
-            throw new Error("Couldn't find user div");
-        userMenu(elt);
-    });
+    // user.addEventListener('click', function (e) {
+    //     let elt = e.target;
+    //     if (!elt || !(elt instanceof HTMLElement))
+    //         throw new Error("Couldn't find user div");
+    //     userMenu(elt);
+    // });
 
     let us = div.children;
 
@@ -2574,17 +2594,17 @@ function gotUser(id, kind) {
 }
 
 function displayUsername() {
-    document.getElementById('userspan').textContent = serverConnection.username;
-    let op = serverConnection.permissions.indexOf('op') >= 0;
-    let present = serverConnection.permissions.indexOf('present') >= 0;
-    let text = '';
-    if (op && present)
-        text = '(op, presenter)';
-    else if (op)
-        text = 'operator';
-    else if (present)
-        text = 'presenter';
-    document.getElementById('permspan').textContent = text;
+    //     document.getElementById('userspan').textContent = serverConnection.username;
+    //     let op = serverConnection.permissions.indexOf('op') >= 0;
+    //     let present = serverConnection.permissions.indexOf('present') >= 0;
+    //     let text = '';
+    //     if (op && present)
+    //         text = '(op, presenter)';
+    //     else if (op)
+    //         text = 'operator';
+    //     else if (present)
+    //         text = 'presenter';
+    //     document.getElementById('permspan').textContent = text;
 }
 
 let presentRequested = null;
@@ -2602,14 +2622,14 @@ function capitalise(s) {
  * @param {string} title
  */
 function setTitle(title) {
-    function set(title) {
-        document.title = title;
-        document.getElementById('title').textContent = title;
-    }
-    if (title)
-        set(title);
-    else
-        set('Galène');
+    // function set(title) {
+    //     document.title = title;
+    //     document.getElementById('title').textContent = title;
+    // }
+    // if (title)
+    //     set(title);
+    // else
+    //     set('Galène');
 }
 
 
@@ -2630,7 +2650,7 @@ async function gotJoined(kind, group, perms, status, data, error, message) {
         case 'fail':
             if (probingState === 'probing' && error === 'need-username') {
                 probingState = 'need-username';
-                setVisibility('passwordform', false);
+                // setVisibility('passwordform', false);
             } else {
                 token = null;
                 displayError('The server said: ' + message);
@@ -2652,8 +2672,8 @@ async function gotJoined(kind, group, perms, status, data, error, message) {
         case 'change':
             if (probingState === 'probing') {
                 probingState = 'success';
-                setVisibility('userform', false);
-                setVisibility('passwordform', false);
+                // setVisibility('userform', false);
+                // setVisibility('passwordform', false);
                 this.close();
                 setButtonsVisibility();
                 return;
@@ -2681,8 +2701,8 @@ async function gotJoined(kind, group, perms, status, data, error, message) {
 
     let input = /** @type{HTMLTextAreaElement} */
         (document.getElementById('input'));
-    input.placeholder = 'Type /help for help';
-    setTimeout(() => { input.placeholder = ''; }, 8000);
+    // input.placeholder = 'Type /help for help';
+    // setTimeout(() => { input.placeholder = ''; }, 8000);
 
     if (status.locked)
         displayWarning('This group is locked');
@@ -2711,9 +2731,9 @@ async function gotJoined(kind, group, perms, status, data, error, message) {
                 button.disabled = false;
             }
         } else {
-            displayMessage(
-                "Press Enable to enable your camera or microphone"
-            );
+            // displayMessage(
+            //     "Press Enable to enable your camera or microphone"
+            // );
         }
     }
 }
@@ -4100,7 +4120,7 @@ function chatResizer(e) {
     );
 }
 
-document.getElementById('resizer').addEventListener('mousedown', chatResizer, false);
+// document.getElementById('resizer').addEventListener('mousedown', chatResizer, false);
 
 /**
  * @param {unknown} message
@@ -4156,15 +4176,15 @@ document.getElementById('loginform').onsubmit = async function (e) {
     if (!(form instanceof HTMLFormElement))
         throw new Error('Bad type for loginform');
 
-    setVisibility('passwordform', true);
+    // setVisibility('passwordform', true);
 
-    if (getInputElement('presentboth').checked)
-        presentRequested = 'both';
-    else if (getInputElement('presentmike').checked)
-        presentRequested = 'mike';
-    else
-        presentRequested = null;
-    getInputElement('presentoff').checked = true;
+    // if (getInputElement('presentboth').checked)
+    //     presentRequested = 'both';
+    // else if (getInputElement('presentmike').checked)
+    //     presentRequested = 'mike';
+    // else
+    //     presentRequested = null;
+    // getInputElement('presentoff').checked = true;
 
     // Connect to the server, gotConnected will join.
     form.active = false;
@@ -4173,66 +4193,66 @@ document.getElementById('loginform').onsubmit = async function (e) {
 
 document.getElementById('disconnectbutton').onclick = function (e) {
     serverConnection.close();
-    closeNav();
+    // closeNav();
 };
 
-function openNav() {
-    document.getElementById("sidebarnav").style.width = "250px";
-}
+// function openNav() {
+//     document.getElementById("sidebarnav").style.width = "250px";
+// }
 
-function closeNav() {
-    document.getElementById("sidebarnav").style.width = "0";
-}
+// function closeNav() {
+//     document.getElementById("sidebarnav").style.width = "0";
+// }
 
-document.getElementById('sidebarCollapse').onclick = function (e) {
-    document.getElementById("left-sidebar").classList.toggle("active");
-    document.getElementById("mainrow").classList.toggle("full-width-active");
-};
+// document.getElementById('sidebarCollapse').onclick = function (e) {
+//     document.getElementById("left-sidebar").classList.toggle("active");
+//     document.getElementById("mainrow").classList.toggle("full-width-active");
+// };
 
-document.getElementById('openside').onclick = function (e) {
-    e.preventDefault();
-    let sidewidth = document.getElementById("sidebarnav").style.width;
-    if (sidewidth !== "0px" && sidewidth !== "") {
-        closeNav();
-        return;
-    } else {
-        openNav();
-    }
-};
+// document.getElementById('openside').onclick = function (e) {
+//     e.preventDefault();
+//     let sidewidth = document.getElementById("sidebarnav").style.width;
+//     if (sidewidth !== "0px" && sidewidth !== "") {
+//         closeNav();
+//         return;
+//     } else {
+//         openNav();
+//     }
+// };
 
 
-document.getElementById('clodeside').onclick = function (e) {
-    e.preventDefault();
-    closeNav();
-};
+// document.getElementById('clodeside').onclick = function (e) {
+//     e.preventDefault();
+//     closeNav();
+// };
 
-document.getElementById('collapse-video').onclick = function (e) {
-    e.preventDefault();
-    setVisibility('collapse-video', false);
-    setVisibility('show-video', true);
-    hideVideo(true);
-};
+// document.getElementById('collapse-video').onclick = function (e) {
+//     e.preventDefault();
+//     setVisibility('collapse-video', false);
+//     setVisibility('show-video', true);
+//     hideVideo(true);
+// };
 
-document.getElementById('show-video').onclick = function (e) {
-    e.preventDefault();
-    setVisibility('video-container', true);
-    setVisibility('collapse-video', true);
-    setVisibility('show-video', false);
-};
+// document.getElementById('show-video').onclick = function (e) {
+//     e.preventDefault();
+//     setVisibility('video-container', true);
+//     setVisibility('collapse-video', true);
+//     setVisibility('show-video', false);
+// };
 
-document.getElementById('close-chat').onclick = function (e) {
-    e.preventDefault();
-    setVisibility('left', false);
-    setVisibility('show-chat', true);
-    resizePeers();
-};
+// document.getElementById('close-chat').onclick = function (e) {
+//     e.preventDefault();
+//     setVisibility('left', false);
+//     setVisibility('show-chat', true);
+//     resizePeers();
+// };
 
-document.getElementById('show-chat').onclick = function (e) {
-    e.preventDefault();
-    setVisibility('left', true);
-    setVisibility('show-chat', false);
-    resizePeers();
-};
+// document.getElementById('show-chat').onclick = function (e) {
+//     e.preventDefault();
+//     setVisibility('left', true);
+//     setVisibility('show-chat', false);
+//     resizePeers();
+// };
 
 async function serverConnect() {
     if (serverConnection && serverConnection.socket)
@@ -4288,8 +4308,8 @@ async function start() {
     }
 
     // Disable simulcast on Firefox by default, it's buggy.
-    if (isFirefox())
-        getSelectElement('simulcastselect').value = 'off';
+    // if (isFirefox())
+    //     getSelectElement('simulcastselect').value = 'off';
 
     let parms = new URLSearchParams(window.location.search);
     if (window.location.search)
@@ -4308,7 +4328,8 @@ async function start() {
     } else if (groupStatus.authPortal) {
         window.location.href = groupStatus.authPortal;
     } else {
-        setVisibility('login-container', true);
+        // setVisibility('login-container', true);
+        document.getElementById('loginDialog').showModal();
 
         var fullname = Cookies.get('fullname');
         if (fullname) {
@@ -4316,10 +4337,19 @@ async function start() {
         }
 
         document.getElementById('username').focus();
-
-        document.getElementById('loginDialog').showModal();
     }
     setViewportHeight();
+
+    $('#room-id').text('ID: ' + group);
+    $('#room-url').val(groupStatus.location);
+
+    $('#copyroomid').on('click', () => shareDialog(true));
+    $('#close-shareDialog').on('click', () => shareDialog(false));
+    $('#sidebar-toggle').on('click', () => $('body').toggleClass('has-sidebar'));
+}
+
+function shareDialog(open) {
+    open ? document.getElementById('shareDialog').showModal() : document.getElementById('shareDialog').close();
 }
 
 export function galeneInit() {
