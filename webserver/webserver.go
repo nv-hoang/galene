@@ -113,7 +113,7 @@ func newMeetHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	id := generateRandomID()
-	http.Redirect(w, r, "/group/"+id, http.StatusFound)
+	http.Redirect(w, r, "/group/"+id+"/", http.StatusFound)
 }
 
 func cspHeader(w http.ResponseWriter, connect string) {
