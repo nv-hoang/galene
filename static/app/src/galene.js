@@ -203,6 +203,7 @@ function reflectSettings() {
     //     settings.mirrorView = getInputElement('mirrorbox').checked;
     //     store = true;
     // }
+    settings.mirrorView = true;
 
     // if (settings.hasOwnProperty('activityDetection')) {
     //     getInputElement('activitybox').checked = settings.activityDetection;
@@ -1928,7 +1929,19 @@ async function setMedia(c, mirror, video) {
         div.id = 'peer-' + c.localId;
         div.classList.add('peer');
 
-        $('<div class="peer-user">' + c.sc.username + '</div>').appendTo(div);
+        $('<div class="peer-user">' + (c.username || c.sc.username) + '</div>').appendTo(div);
+        $(div).on('click', function () {
+            if ($('.peer').length > 1) {
+                if ($(this).hasClass('pinned')) {
+                    $(this).removeClass('pinned');
+                    $('#peers').removeClass('has-pinned');
+                } else {
+                    $('.peer').removeClass('pinned');
+                    $(this).addClass('pinned');
+                    $('#peers').addClass('has-pinned');
+                }
+            }
+        });
 
         let peersdiv = document.getElementById('peers');
         peersdiv.appendChild(div);
@@ -1956,6 +1969,7 @@ async function setMedia(c, mirror, video) {
         addCustomControls(media, div, c, !!video);
     }
 
+    mirror = c.label == 'camera' && getSettings().mirrorView;
     if (mirror)
         media.classList.add('mirror');
     else
@@ -1991,21 +2005,22 @@ async function setMedia(c, mirror, video) {
  * @param {HTMLElement} elt
  */
 function showHideMedia(c, elt) {
-    let display = c.up || getSettings().displayAll;
-    if (!display && c.stream) {
-        let tracks = c.stream.getTracks();
-        for (let i = 0; i < tracks.length; i++) {
-            let t = tracks[i];
-            if (t.kind === 'video') {
-                display = true;
-                break;
-            }
-        }
-    }
-    if (display)
-        elt.classList.remove('peer-hidden');
-    else
-        elt.classList.add('peer-hidden');
+    // console.log(c,elt);
+    // let display = c.up || getSettings().displayAll;
+    // if (!display && c.stream) {
+    //     let tracks = c.stream.getTracks();
+    //     for (let i = 0; i < tracks.length; i++) {
+    //         let t = tracks[i];
+    //         if (t.kind === 'video') {
+    //             display = true;
+    //             break;
+    //         }
+    //     }
+    // }
+    // if (display)
+    //     elt.classList.remove('peer-hidden');
+    // else
+    //     elt.classList.add('peer-hidden');
 }
 
 /**
@@ -2192,6 +2207,10 @@ function delMedia(localId) {
     let peer = document.getElementById('peer-' + localId);
     if (!peer)
         throw new Error('Removing unknown media');
+
+    if ($(peer).hasClass('pinned')) {
+        $('#peers').removeClass('has-pinned');
+    }
 
     let media = /** @type{HTMLVideoElement} */
         (document.getElementById('media-' + localId));
@@ -2598,6 +2617,8 @@ function gotUser(id, kind) {
             console.warn('Unknown user kind', kind);
             break;
     }
+
+    $('#total-users').text('(' + Object.keys(serverConnection.users).length + ')');
 }
 
 function displayUsername() {
@@ -4352,7 +4373,15 @@ async function start() {
 
     $('#copyroomid').on('click', () => shareDialog(true));
     $('#close-shareDialog').on('click', () => shareDialog(false));
-    $('.sidebar-toggle').on('click', () => $('body').toggleClass('has-sidebar'));
+
+    $('.sidebar-toggle').on('click', () => {
+        $('.user-sidebar').removeClass('open');
+        $('body').toggleClass('has-sidebar');
+    });
+    $('.user-sidebar-toggle').on('click', () => {
+        $('body').removeClass('has-sidebar');
+        $('.user-sidebar').toggleClass('open');
+    });
 }
 
 function shareDialog(open) {

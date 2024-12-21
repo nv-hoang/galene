@@ -9,11 +9,16 @@
 #peers {
     min-height: calc(100dvh - 128px);
 }
-
 #peers .peer {
     position: relative;
     border-radius: 8px;
     overflow: hidden;
+    min-height: calc((100dvh - 128px)/3 - 5px);
+    cursor: pointer;
+}
+
+#peers .peer.peer-hidden {
+    display: none !important;
 }
 
 #peers .peer .peer-user{
@@ -38,13 +43,25 @@
     background-color: black;
 }
 
+#peers .peer .media.mirror {
+    transform: scaleX(-1);
+}
+
 #peers .peer .media.camera {
     object-fit: cover !important;
 }
 
 .sidebar {
-    height: calc(100dvh - 128px);
+    height: calc(100dvh - 32px);
     max-width: calc(100vw - 32px);
+    transform: translateX(400px);
+}
+
+.user-sidebar {
+    height: calc(100dvh - 32px);
+    max-width: calc(100vw - 32px);
+}
+.user-sidebar:not(.open) {
     transform: translateX(400px);
 }
 
@@ -55,7 +72,12 @@ body.has-sidebar .sidebar {
 @media (min-width: 1024px) {
     body.has-sidebar .main-container {
         margin-right: 366px;
-    }    
+    }
+
+    .sidebar,
+    .user-sidebar {
+        height: calc(100dvh - 128px);
+    }
 }
 
 #chatbox .message-header {
@@ -83,4 +105,50 @@ body.has-sidebar .sidebar {
     border-radius: 6px;
     background-color: #dfdfdf;
     margin-bottom: 4px;
+}
+
+@media (max-width: 767px) {
+    #peers {
+        display: flex;
+        flex-direction: column;
+        grid-template-columns: repeat(1, 1fr) !important;
+    }
+
+    #peers .peer {
+        min-height: 200px !important;
+    }
+}
+
+.user-p {
+    padding: 8px 10px;
+    border-radius: 6px;
+    background-color: #dfdfdf;
+    margin-bottom: 4px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 8px;
+}
+
+.user-p::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 8px;
+    background-color: green;
+}
+.user-p.user-status-camera {
+    padding-right: 36px;
+    background-image: url('/assets/video.svg');
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: center right 10px;
+}
+
+#peers.has-pinned {
+    grid-template-columns: repeat(1, 1fr) !important;
+}
+
+#peers.has-pinned .peer:not(.pinned) {
+    display: none !important;
 }
