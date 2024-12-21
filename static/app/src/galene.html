@@ -21,7 +21,7 @@
     </div>
   </div>
 
-  <div class="sidebar w-[350px] fixed top-4 right-4 rounded-md bg-white transition-transform text-black overflow-hidden">
+  <div class="sidebar w-[350px] fixed z-10 top-4 right-4 rounded-md bg-white transition-transform text-black overflow-hidden">
     <div id="chat" class="h-full">
       <div id="chatbox" class="flex flex-col text-[13px] gap-2 h-full">
         <div id="box" class="flex-1 overflow-auto p-4"></div>
@@ -54,27 +54,27 @@
         </button>
       </div>
 
-      <div class="flex items-center gap-5 justify-center">
+      <div class="flex items-center gap-4 md:gap-5 justify-center">
         <button id="presentbutton" class="text-center">
-          <div class="w-[48px] h-[48px] mx-auto bg-dark-700 hover:bg-dark-800 transition-colors flex items-center justify-center rounded-full mb-1">
+          <div class="w-[40px] h-[40px] md:w-[48px] md:h-[48px] mx-auto bg-dark-700 hover:bg-dark-800 transition-colors flex items-center justify-center rounded-full mb-1">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M3.28 2.21997C3.21134 2.14628 3.12854 2.08718 3.03654 2.04619C2.94454 2.0052 2.84523 1.98316 2.74452 1.98138C2.64382 1.9796 2.54379 1.99813 2.4504 2.03585C2.35702 2.07357 2.27218 2.12971 2.20096 2.20093C2.12974 2.27215 2.0736 2.35698 2.03588 2.45037C1.99816 2.54376 1.97963 2.64379 1.98141 2.74449C1.98319 2.8452 2.00523 2.94451 2.04622 3.03651C2.08721 3.12851 2.14631 3.21131 2.22 3.27997L4.135 5.19597C3.5089 5.42465 2.96826 5.84031 2.58635 6.38661C2.20444 6.9329 1.99974 7.58342 2 8.24997V15.75C2 16.6119 2.34241 17.4386 2.9519 18.0481C3.5614 18.6576 4.38805 19 5.25 19H11.75C12.5606 19.0001 13.3421 18.6973 13.941 18.151C14.5398 17.6046 14.9129 16.8542 14.987 16.047L20.719 21.78C20.8604 21.9167 21.0498 21.9923 21.2465 21.9907C21.4431 21.9891 21.6313 21.9103 21.7704 21.7713C21.9095 21.6323 21.9885 21.4443 21.9903 21.2476C21.9921 21.051 21.9166 20.8615 21.78 20.72L3.28 2.21997ZM16 12.818L21.008 17.826C21.578 17.552 22.002 16.978 22.002 16.248V7.75297C22.002 6.34297 20.418 5.51097 19.257 6.31297L16 8.56297V12.818ZM8.182 4.99997L15 11.818V8.24997C15 7.82317 14.9159 7.40056 14.7526 7.00625C14.5893 6.61194 14.3499 6.25366 14.0481 5.95187C13.7463 5.65008 13.388 5.41069 12.9937 5.24736C12.5994 5.08403 12.1768 4.99997 11.75 4.99997H8.182Z" fill="#D23325" />
             </svg>
           </div>
-          <div>Camera</div>
+          <div class="text-[14px] md:text-[16px]">Camera</div>
         </button>
 
         <button id="unpresentbutton" class="hidden text-center">
-          <div class="w-[48px] h-[48px] mx-auto bg-dark-700 hover:bg-dark-800 transition-colors flex items-center justify-center rounded-full mb-1">
+          <div class="w-[40px] h-[40px] md:w-[48px] md:h-[48px] mx-auto bg-dark-700 hover:bg-dark-800 transition-colors flex items-center justify-center rounded-full mb-1">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M1.71428 8.35717C1.71428 7.50469 2.05293 6.68712 2.65572 6.08433C3.25852 5.48153 4.07608 5.14288 4.92856 5.14288H12.2143C13.0668 5.14288 13.8843 5.48153 14.4871 6.08433C15.0899 6.68712 15.4286 7.50469 15.4286 8.35717V15.6429C15.4286 16.4954 15.0899 17.3129 14.4871 17.9157C13.8843 18.5185 13.0668 18.8572 12.2143 18.8572H4.92856C4.07608 18.8572 3.25852 18.5185 2.65572 17.9157C2.05293 17.3129 1.71428 16.4954 1.71428 15.6429V8.35717ZM19.9303 17.7283L16.2857 15.2117V8.78574L19.9303 6.26917C20.9246 5.58174 22.2823 6.29488 22.2823 7.50345V16.4949C22.2823 17.7035 20.9254 18.4149 19.9303 17.7283Z" fill="white" />
             </svg>
           </div>
-          <div>Camera</div>
+          <div class="text-[14px] md:text-[16px]">Camera</div>
         </button>
 
         <button id="mutebutton" class="text-center">
-          <div class="w-[48px] h-[48px] mx-auto bg-dark-700 hover:bg-dark-800 transition-colors flex items-center justify-center rounded-full mb-1">
+          <div class="w-[40px] h-[40px] md:w-[48px] md:h-[48px] mx-auto bg-dark-700 hover:bg-dark-800 transition-colors flex items-center justify-center rounded-full mb-1">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 2C12.7956 2 13.5587 2.31607 14.1213 2.87868C14.6839 3.44129 15 4.20435 15 5V11C15 11.7956 14.6839 12.5587 14.1213 13.1213C13.5587 13.6839 12.7956 14 12 14C11.2044 14 10.4413 13.6839 9.87868 13.1213C9.31607 12.5587 9 11.7956 9 11V5C9 4.20435 9.31607 3.44129 9.87868 2.87868C10.4413 2.31607 11.2044 2 12 2ZM19 11C19 14.53 16.39 17.44 13 17.93V21H11V17.93C7.61 17.44 5 14.53 5 11H7C7 12.3261 7.52678 13.5979 8.46447 14.5355C9.40215 15.4732 10.6739 16 12 16C13.3261 16 14.5979 15.4732 15.5355 14.5355C16.4732 13.5979 17 12.3261 17 11H19Z" fill="white" />
             </svg>
@@ -82,37 +82,49 @@
               <path d="M19 11C19 12.19 18.66 13.3 18.1 14.28L16.87 13.05C17.14 12.43 17.3 11.74 17.3 11H19ZM15 11.16L9 5.18V5C9 4.20435 9.31607 3.44129 9.87868 2.87868C10.4413 2.31607 11.2044 2 12 2C12.7956 2 13.5587 2.31607 14.1213 2.87868C14.6839 3.44129 15 4.20435 15 5V11.16ZM4.27 3L21 19.73L19.73 21L15.54 16.81C14.77 17.27 13.91 17.58 13 17.72V21H11V17.72C7.72 17.23 5 14.41 5 11H6.7C6.7 14 9.24 16.1 12 16.1C12.81 16.1 13.6 15.91 14.31 15.58L12.65 13.92L12 14C11.2044 14 10.4413 13.6839 9.87868 13.1213C9.31607 12.5587 9 11.7956 9 11V10.28L3 4.27L4.27 3Z" fill="#D23325" />
             </svg>
           </div>
-          <div>Sound</div>
+          <div class="text-[14px] md:text-[16px]">Sound</div>
         </button>
 
         <button id="sharebutton" class="text-center">
-          <div class="w-[48px] h-[48px] mx-auto bg-dark-700 hover:bg-dark-800 transition-colors flex items-center justify-center rounded-full mb-1">
+          <div class="w-[40px] h-[40px] md:w-[48px] md:h-[48px] mx-auto bg-dark-700 hover:bg-dark-800 transition-colors flex items-center justify-center rounded-full mb-1">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M2 6.25C2 5.65326 2.23705 5.08097 2.65901 4.65901C3.08097 4.23705 3.65326 4 4.25 4H19.75C20.3467 4 20.919 4.23705 21.341 4.65901C21.7629 5.08097 22 5.65326 22 6.25V17.75C22 18.0455 21.9418 18.3381 21.8287 18.611C21.7157 18.884 21.5499 19.1321 21.341 19.341C21.1321 19.5499 20.884 19.7157 20.611 19.8287C20.3381 19.9418 20.0455 20 19.75 20H4.25C3.95453 20 3.66194 19.9418 3.38896 19.8287C3.11598 19.7157 2.86794 19.5499 2.65901 19.341C2.45008 19.1321 2.28434 18.884 2.17127 18.611C2.0582 18.3381 2 18.0455 2 17.75V6.25ZM4.25 5.5C4.05109 5.5 3.86032 5.57902 3.71967 5.71967C3.57902 5.86032 3.5 6.05109 3.5 6.25V17.75C3.5 18.164 3.836 18.5 4.25 18.5H19.75C19.9489 18.5 20.1397 18.421 20.2803 18.2803C20.421 18.1397 20.5 17.9489 20.5 17.75V6.25C20.5 6.05109 20.421 5.86032 20.2803 5.71967C20.1397 5.57902 19.9489 5.5 19.75 5.5H4.25ZM12 7.245C12.1988 7.24517 12.3895 7.32431 12.53 7.465L15.785 10.72C15.8587 10.7887 15.9178 10.8715 15.9588 10.9635C15.9998 11.0555 16.0218 11.1548 16.0236 11.2555C16.0254 11.3562 16.0068 11.4562 15.9691 11.5496C15.9314 11.643 15.8753 11.7278 15.804 11.799C15.7328 11.8703 15.648 11.9264 15.5546 11.9641C15.4612 12.0018 15.3612 12.0204 15.2605 12.0186C15.1598 12.0168 15.0605 11.9948 14.9685 11.9538C14.8765 11.9128 14.7937 11.8537 14.725 11.78L12.75 9.806V16.253C12.75 16.4519 12.671 16.6427 12.5303 16.7833C12.3897 16.924 12.1989 17.003 12 17.003C11.8011 17.003 11.6103 16.924 11.4697 16.7833C11.329 16.6427 11.25 16.4519 11.25 16.253V9.808L9.28 11.78C9.21134 11.8537 9.12854 11.9128 9.03654 11.9538C8.94454 11.9948 8.84522 12.0168 8.74452 12.0186C8.64382 12.0204 8.54379 12.0018 8.4504 11.9641C8.35701 11.9264 8.27218 11.8703 8.20096 11.799C8.12974 11.7278 8.0736 11.643 8.03588 11.5496C7.99816 11.4562 7.97963 11.3562 7.98141 11.2555C7.98319 11.1548 8.00523 11.0555 8.04622 10.9635C8.08721 10.8715 8.14631 10.7887 8.22 10.72L11.47 7.466C11.6105 7.32531 11.8012 7.24517 12 7.245Z" fill="white" />
             </svg>
           </div>
-          <div>Screen</div>
+          <div class="text-[14px] md:text-[16px]">Screen</div>
+        </button>
+
+        <button class="text-center sidebar-toggle md:hidden">
+          <div class="w-[40px] h-[40px] md:w-[48px] md:h-[48px] mx-auto bg-dark-700 hover:bg-dark-800 transition-colors flex items-center justify-center rounded-full mb-1">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2.4 5.99998C2.4 5.36346 2.65286 4.75301 3.10295 4.30292C3.55303 3.85283 4.16348 3.59998 4.8 3.59998H13.2C13.8365 3.59998 14.447 3.85283 14.8971 4.30292C15.3471 4.75301 15.6 5.36346 15.6 5.99998V10.8C15.6 11.4365 15.3471 12.0469 14.8971 12.497C14.447 12.9471 13.8365 13.2 13.2 13.2H10.8L7.2 16.8V13.2H4.8C4.16348 13.2 3.55303 12.9471 3.10295 12.497C2.65286 12.0469 2.4 11.4365 2.4 10.8V5.99998Z" fill="white" />
+              <path d="M18 8.39996V10.8C18 12.073 17.4943 13.2939 16.5941 14.1941C15.6939 15.0943 14.473 15.6 13.2 15.6H11.7936L9.6744 17.7204C10.0104 17.8992 10.3932 18 10.8 18H13.2L16.8 21.6V18H19.2C19.8365 18 20.447 17.7471 20.8971 17.297C21.3471 16.8469 21.6 16.2365 21.6 15.6V10.8C21.6 10.1634 21.3471 9.55299 20.8971 9.10291C20.447 8.65282 19.8365 8.39996 19.2 8.39996H18Z" fill="white" />
+            </svg>
+          </div>
+          <div class="text-[14px] md:text-[16px]">Chat</div>
         </button>
 
         <button id="disconnectbutton" class="hidden text-center">
-          <div class="w-[48px] h-[48px] mx-auto bg-danger-500 hover:bg-danger-600 transition-colors flex items-center justify-center rounded-full mb-1">
+          <div class="w-[40px] h-[40px] md:w-[48px] md:h-[48px] mx-auto bg-danger-500 hover:bg-danger-600 transition-colors flex items-center justify-center rounded-full mb-1">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M17.5 8.842C15.976 8.337 14.146 8 12 8C9.854 8 8.024 8.337 6.5 8.842M17.5 8.842C20.521 9.842 22.335 11.502 23 12.5L20.5 15L17.5 13V8.842ZM6.5 8.842C3.479 9.842 1.665 11.502 1 12.5L3.5 15L6.5 13V8.842Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
           </div>
-          <div>Leave</div>
+          <div class="text-[14px] md:text-[16px]">Leave</div>
         </button>
       </div>
 
-      <button id="sidebar-toggle" class="text-center ml-auto">
-        <div class="w-[48px] h-[48px] mx-auto bg-dark-700 hover:bg-dark-800 transition-colors flex items-center justify-center rounded-full mb-1">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2.4 5.99998C2.4 5.36346 2.65286 4.75301 3.10295 4.30292C3.55303 3.85283 4.16348 3.59998 4.8 3.59998H13.2C13.8365 3.59998 14.447 3.85283 14.8971 4.30292C15.3471 4.75301 15.6 5.36346 15.6 5.99998V10.8C15.6 11.4365 15.3471 12.0469 14.8971 12.497C14.447 12.9471 13.8365 13.2 13.2 13.2H10.8L7.2 16.8V13.2H4.8C4.16348 13.2 3.55303 12.9471 3.10295 12.497C2.65286 12.0469 2.4 11.4365 2.4 10.8V5.99998Z" fill="white" />
-            <path d="M18 8.39996V10.8C18 12.073 17.4943 13.2939 16.5941 14.1941C15.6939 15.0943 14.473 15.6 13.2 15.6H11.7936L9.6744 17.7204C10.0104 17.8992 10.3932 18 10.8 18H13.2L16.8 21.6V18H19.2C19.8365 18 20.447 17.7471 20.8971 17.297C21.3471 16.8469 21.6 16.2365 21.6 15.6V10.8C21.6 10.1634 21.3471 9.55299 20.8971 9.10291C20.447 8.65282 19.8365 8.39996 19.2 8.39996H18Z" fill="white" />
-          </svg>
-        </div>
-        <div>Chat</div>
-      </button>
+      <div class="hidden md:block ml-auto min-w-[148px] text-right">
+        <button class="text-center sidebar-toggle">
+          <div class="w-[40px] h-[40px] md:w-[48px] md:h-[48px] mx-auto bg-dark-700 hover:bg-dark-800 transition-colors flex items-center justify-center rounded-full mb-1">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2.4 5.99998C2.4 5.36346 2.65286 4.75301 3.10295 4.30292C3.55303 3.85283 4.16348 3.59998 4.8 3.59998H13.2C13.8365 3.59998 14.447 3.85283 14.8971 4.30292C15.3471 4.75301 15.6 5.36346 15.6 5.99998V10.8C15.6 11.4365 15.3471 12.0469 14.8971 12.497C14.447 12.9471 13.8365 13.2 13.2 13.2H10.8L7.2 16.8V13.2H4.8C4.16348 13.2 3.55303 12.9471 3.10295 12.497C2.65286 12.0469 2.4 11.4365 2.4 10.8V5.99998Z" fill="white" />
+              <path d="M18 8.39996V10.8C18 12.073 17.4943 13.2939 16.5941 14.1941C15.6939 15.0943 14.473 15.6 13.2 15.6H11.7936L9.6744 17.7204C10.0104 17.8992 10.3932 18 10.8 18H13.2L16.8 21.6V18H19.2C19.8365 18 20.447 17.7471 20.8971 17.297C21.3471 16.8469 21.6 16.2365 21.6 15.6V10.8C21.6 10.1634 21.3471 9.55299 20.8971 9.10291C20.447 8.65282 19.8365 8.39996 19.2 8.39996H18Z" fill="white" />
+            </svg>
+          </div>
+          <div class="text-[14px] md:text-[16px]">Chat</div>
+        </button>
+      </div>
     </div>
   </div>
 

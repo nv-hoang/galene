@@ -171,6 +171,8 @@ function reflectSettings() {
     //     settings.request = getSelectElement('requestselect').value;
     //     store = true;
     // }
+    settings.request = 'everything';
+    store = true;
 
     // if (settings.hasOwnProperty('send')) {
     //     getSelectElement('sendselect').value = settings.send;
@@ -178,6 +180,7 @@ function reflectSettings() {
     //     settings.send = getSelectElement('sendselect').value;
     //     store = true;
     // }
+    settings.send = 'normal';
 
     // if (settings.hasOwnProperty('simulcast')) {
     //     getSelectElement('simulcastselect').value = settings.simulcast
@@ -185,6 +188,7 @@ function reflectSettings() {
     //     settings.simulcast = getSelectElement('simulcastselect').value;
     //     store = true;
     // }
+    settings.simulcast = 'auto';
 
     // if (settings.hasOwnProperty('blackboardMode')) {
     //     getInputElement('blackboardbox').checked = settings.blackboardMode;
@@ -308,7 +312,7 @@ function setConnected(connected) {
         setVisibility('disconnectbutton', false);
 
         // connectionbox.classList.remove('invisible');
-        document.getElementById('loginDialog').showModal();
+        // document.getElementById('loginDialog').showModal();
 
         hideVideo();
         window.onresize = null;
@@ -345,6 +349,8 @@ function setChangePassword(username) {
 
 async function join() {
     let username = getInputElement('username').value.trim();
+    Cookies.set('fullname', username);
+
     let credentials;
     if (token) {
         pwAuth = false;
@@ -1942,6 +1948,7 @@ async function setMedia(c, mirror, video) {
         }
 
         media.classList.add('media');
+        media.classList.add(c.label);
         media.autoplay = true;
         media.playsInline = true;
         media.id = 'media-' + c.localId;
@@ -4345,7 +4352,7 @@ async function start() {
 
     $('#copyroomid').on('click', () => shareDialog(true));
     $('#close-shareDialog').on('click', () => shareDialog(false));
-    $('#sidebar-toggle').on('click', () => $('body').toggleClass('has-sidebar'));
+    $('.sidebar-toggle').on('click', () => $('body').toggleClass('has-sidebar'));
 }
 
 function shareDialog(open) {

@@ -1,0 +1,16 @@
+services:  
+  app:
+    build:
+      context: ./galene
+    working_dir: /app
+    networks:
+      - app-network
+    volumes:
+      - ./galene:/app
+    ports:
+      - 8443:8443
+      - 1194:1194
+
+networks:
+  app-network:
+    driver: bridge

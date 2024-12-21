@@ -29,7 +29,7 @@
     z-index: 1;
 }
 
-.media {
+#peers .peer .media {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -38,41 +38,46 @@
     background-color: black;
 }
 
-.sidebar {
-    height: calc(100dvh - 128px);
+#peers .peer .media.camera {
+    object-fit: cover !important;
 }
 
 .sidebar {
+    height: calc(100dvh - 128px);
+    max-width: calc(100vw - 32px);
     transform: translateX(400px);
 }
 
-body.has-sidebar .main-container {
-    margin-right: 366px;
-}
 body.has-sidebar .sidebar {
     transform: translateX(0px) !important;
 }
 
-.message-header {
+@media (min-width: 1024px) {
+    body.has-sidebar .main-container {
+        margin-right: 366px;
+    }    
+}
+
+#chatbox .message-header {
     margin-top: 12px;
 }
-.message-user {
+#chatbox .message-user {
     font-weight: 600;
     margin-right: 6px;
 }
 
-.message-time {
+#chatbox .message-time {
     color: #5f6368;
     font-style: italic;
     font-size: 12px;
 }
 
-.message-content {
+#chatbox .message-content {
     white-space: pre-wrap;
     word-wrap: break-word;
 }
 
-.message-content > div {
+#chatbox .message-content > div {
     display: inline-block;
     padding: 4px 10px;
     border-radius: 6px;
